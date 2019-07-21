@@ -1,16 +1,17 @@
 import React from 'react';
 import './App.css';
 import Login from '../login/Login';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-const App = () => {
-  return (
-    <div className="App">
+const App = () => (
+  <div className="App">
+    <BrowserRouter>
       <Switch>
-        <Route path="/" component={Login} />
+        <Route path="/login" component={Login} />
       </Switch>
-    </div>
-  );
-}
+    </BrowserRouter>
+  </div>
+  
+);
 
 export default App;
