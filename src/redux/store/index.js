@@ -8,3 +8,4 @@ const sagaMiddleware = createSagaMiddleware()
 export default createStore(rootReducer, applyMiddleware(logger, sagaMiddleware));
 
 sagaMiddleware.run(rootSaga)
+
