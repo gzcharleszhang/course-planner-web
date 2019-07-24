@@ -1,6 +1,10 @@
 import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { Formik, Field, Form, ErrorMessage, withFormik } from 'formik';
+import { bindActionCreators } from 'redux';
+import loginUserAction from './login.actions'
+import { connect } from 'react-redux';
+
 
 const initialValues = {
     email: '',
@@ -15,11 +19,12 @@ const LoginSchema = Yup.object().shape({
         .max(50, "Too Long!")
 });
 
-const Login = () => (
+const LoginPage = (props) => (
     <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
-        render={({ errors, touched }) => (
+        onSubmit={props.handleSubmit}
+        render={({ errors, touched, isSubmitting }) => (
             <Form>
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
@@ -32,12 +37,19 @@ const Login = () => (
                     <ErrorMessage name="password" component="div" className="invalid-feedback" />
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary mr-2">Login</button>
+                    <button type="submit" className="btn btn-primary mr-2" disabled={isSubmitting}>Login</button>
                     <button type="button" className="btn btn-secondary">Signup</button>
                 </div>
             </Form>
         )} />
 );
 
+const EnhancedLoginPage = withFormik({
+    handleSubmit: (values, { props, setSubmitting }) => {
+        props.loginUserAction(values);
+        setSubmitting(false);
+    } 
+})(LoginPage);
 
-export default Login;
+const mapDispatchToProps = (dispatch) => (bindActionCreators({loginUserAction}, dispatch))
+export default connect(null, mapDispatchToProps)(EnhancedLoginPage);

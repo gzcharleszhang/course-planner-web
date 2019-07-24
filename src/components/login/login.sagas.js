@@ -1,5 +1,6 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { LOGIN_USER, LOGIN_USER_SUCCESS, LOGIN_USER_ERROR } from "./login.types";
+import loginUserService from './login.services';
 
 
 export function* loginSaga(payload) {
