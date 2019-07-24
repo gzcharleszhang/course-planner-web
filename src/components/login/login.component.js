@@ -23,8 +23,8 @@ const LoginPage = (props) => (
     <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
-        onSubmit={props.handleSubmit}
-        render={({ errors, touched, isSubmitting }) => (
+        onSubmit={(values) => (props.loginUserAction(values))}
+        render={({ errors, touched }) => (
             <Form>
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
@@ -37,19 +37,12 @@ const LoginPage = (props) => (
                     <ErrorMessage name="password" component="div" className="invalid-feedback" />
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary mr-2" disabled={isSubmitting}>Login</button>
+                    <button type="submit" className="btn btn-primary mr-2">Login</button>
                     <button type="button" className="btn btn-secondary">Signup</button>
                 </div>
             </Form>
         )} />
 );
 
-const EnhancedLoginPage = withFormik({
-    handleSubmit: (values, { props, setSubmitting }) => {
-        props.loginUserAction(values);
-        setSubmitting(false);
-    } 
-})(LoginPage);
-
-const mapDispatchToProps = (dispatch) => (bindActionCreators({loginUserAction}, dispatch))
-export default connect(null, mapDispatchToProps)(EnhancedLoginPage);
+const mapDispatchToProps = dispatch => (bindActionCreators({loginUserAction}, dispatch))
+export default connect(null, mapDispatchToProps)(LoginPage);

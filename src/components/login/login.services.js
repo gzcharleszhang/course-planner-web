@@ -19,7 +19,4 @@
 //         });
 // };
 
-export default (payload) => {
-    console.log(payload)
-    return 'hello'
-}
+export default (payload) => (payload.user.password);
