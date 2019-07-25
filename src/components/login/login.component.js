@@ -1,9 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { Formik, Field, Form, ErrorMessage, withFormik } from 'formik';
-import { bindActionCreators } from 'redux';
-import loginUserAction from './login.actions'
-import { connect } from 'react-redux';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+
 
 
 const initialValues = {
@@ -19,30 +17,27 @@ const LoginSchema = Yup.object().shape({
         .max(50, "Too Long!")
 });
 
-const LoginPage = ({ loginUserAction }) => (
+export default ({ loginUserAction }) => (
     <Formik
-        initialValues={initialValues}
-        validationSchema={LoginSchema}
-        onSubmit={(values) => (loginUserAction(values))}
-        render={({ errors, touched }) => (
-            <Form>
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <Field name="email" type="text" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
-                    <ErrorMessage name="email" component="div" className="invalid-feedback" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
-                    <ErrorMessage name="password" component="div" className="invalid-feedback" />
-                </div>
-                <div className="form-group">
-                    <button type="submit" className="btn btn-primary mr-2">Login</button>
-                    <button type="button" className="btn btn-secondary">Signup</button>
-                </div>
-            </Form>
-        )} />
+    initialValues={initialValues}
+    validationSchema={LoginSchema}
+    onSubmit={(values) => (loginUserAction(values))}
+    render={({ errors, touched }) => (
+        <Form>
+            <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <Field name="email" type="text" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
+                <ErrorMessage name="email" component="div" className="invalid-feedback" />
+            </div>
+            <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
+                <ErrorMessage name="password" component="div" className="invalid-feedback" />
+            </div>
+            <div className="form-group">
+                <button type="submit" className="btn btn-primary mr-2">Login</button>
+                <button type="button" className="btn btn-secondary">Signup</button>
+            </div>
+        </Form>
+    )} />
 );
-
-const mapDispatchToProps = dispatch => (bindActionCreators({loginUserAction}, dispatch))
-export default connect(null, mapDispatchToProps)(LoginPage);

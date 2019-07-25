@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from '../login/login.component';
+import Login from '../login/login.container'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const App = () => (
