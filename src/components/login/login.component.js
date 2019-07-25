@@ -19,11 +19,11 @@ const LoginSchema = Yup.object().shape({
         .max(50, "Too Long!")
 });
 
-const LoginPage = (props) => (
+const LoginPage = ({ loginUserAction }) => (
     <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
-        onSubmit={(values) => (props.loginUserAction(values))}
+        onSubmit={(values) => (loginUserAction(values))}
         render={({ errors, touched }) => (
             <Form>
                 <div className="form-group">
