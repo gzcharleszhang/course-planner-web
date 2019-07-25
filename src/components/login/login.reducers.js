@@ -8,9 +8,9 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_USER_SUCCESS:
-            return { ...state, user: get(action.payload, undefined) }
+            return { ...state, user: get(action.payload, null) }
         case LOGIN_USER_ERROR:
-            return { ...state, user: get(action.payload, undefined) }
+            return { ...state, user: get(action.payload, null) }
         default:
             return state;
     }
