@@ -8,7 +8,7 @@ export function* loginSaga(payload) {
         const response = yield call(loginUserService, payload);
         yield put({ type: LOGIN_USER_SUCCESS, response });
     } catch (error) {
-        yield put({ type: LOGIN_USER_ERROR, error })
+        yield put({ type: LOGIN_USER_ERROR, error });
     }
 }
 
