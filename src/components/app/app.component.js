@@ -1,6 +1,5 @@
 import React from 'react';
-import './app.css';
-import Login from '../login/login.component';
+import Login from '../login/login.container'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const App = () => (
@@ -11,7 +10,7 @@ const App = () => (
       </Switch>
     </BrowserRouter>
   </div>
-  
+
 );
 
 export default App;
