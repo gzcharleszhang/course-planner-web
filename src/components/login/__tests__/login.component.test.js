@@ -1,8 +1,8 @@
 import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import toJson from 'enzyme-to-json';
 import Login from '../login.component'
-import LoginContainer from '../login.container'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -11,7 +11,7 @@ function setup() {
         loginUserAction: jest.fn()
     };
 
-    const enzymeWrapper = shallow(<LoginContainer/>)
+    const enzymeWrapper = shallow(<Login props={props}/>)
 
     return {
         props,
@@ -19,24 +19,10 @@ function setup() {
     }
 }
 
-describe('components', () => {
-    describe('Header', () => {
-        it('should render self and subcomponents', () => {
-            const { enzymeWrapper } = setup();
-            expect(enzymeWrapper.find('#email-field')).toBe(true);
-            expect(enzymeWrapper.find('#password-field')).toBe(true);
-            
-            const loginProps = enzymeWrapper.find('Formik').props();
-            expect(loginProps.newTodo).toBe(true);
-        })
-
-        // it('should call addTodo if length of text is greater than 0', () => {
-        //     const { enzymeWrapper, props } = setup()
-        //     const input = enzymeWrapper.find('TodoTextInput')
-        //     input.props().onSave('')
-        //     expect(props.addTodo.mock.calls.length).toBe(0)
-        //     input.props().onSave('Use Redux')
-        //     expect(props.addTodo.mock.calls.length).toBe(1)
-        // })
-    })
+describe('<Login />', () => {
+    it('should render the component', () => {
+        const { enzymeWrapper } = setup();
+        const component = enzymeWrapper.dive();
+        expect(toJson(component)).toMatchSnapshot();
+    });
 })
