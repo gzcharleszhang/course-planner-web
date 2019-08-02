@@ -1,7 +1,7 @@
 import loginUser from '../login.actions'
 import { LOGIN_USER } from '../login.types'
 
-describe('Actions', () => {
+describe('Login Actions', () => {
   it('should create an action to login a user', () => {
     const user = {
       email: "KevinZhang@gmail.com",

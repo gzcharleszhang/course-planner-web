@@ -19,7 +19,7 @@ function setup() {
     }
 }
 
-describe('<Login />', () => {
+describe('Login Component', () => {
     it('should render the component', () => {
         const { enzymeWrapper } = setup();
         const component = enzymeWrapper.dive();
